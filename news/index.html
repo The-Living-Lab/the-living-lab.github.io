@@ -55,6 +55,10 @@
     const count = document.querySelector("#news-count");
     const empty = document.querySelector("#news-empty");
 
+    function isPublished(entry) {
+      return String(entry && entry.status || "").trim().toLowerCase() !== "hidden";
+    }
+
     function assetUrl(value) {
       if (!value) return "";
       const splitAt = value.search(/[?#]/);
@@ -71,7 +75,7 @@
 
     function render(articles) {
       list.replaceChildren();
-      const visible = articles.filter((article) => article && article.title && article.slug);
+      const visible = articles.filter((article) => article && article.title && article.slug && isPublished(article));
       count.textContent = visible.length === 1 ? "1 article" : `${visible.length} articles`;
       empty.hidden = visible.length > 0;
 

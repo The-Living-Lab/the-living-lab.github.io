@@ -4,15 +4,43 @@ const path = require("path");
 const root = path.join(__dirname, "..");
 const dist = path.join(root, "dist");
 
-function copyDir(src, dest) {
+function copyDir(src, dest, shouldSkip, scope) {
   if (!fs.existsSync(src)) return;
+  const base = scope || src;
   fs.mkdirSync(dest, { recursive: true });
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
     const from = path.join(src, entry.name);
     const to = path.join(dest, entry.name);
-    if (entry.isDirectory()) copyDir(from, to);
+    const rel = path.relative(base, from).replace(/\\/g, "/");
+    if (shouldSkip && shouldSkip(rel)) continue;
+    if (entry.isDirectory()) copyDir(from, to, shouldSkip, base);
     else fs.copyFileSync(from, to);
   }
+}
+
+function isHidden(entry) {
+  return String(entry && entry.status || "").trim().toLowerCase() === "hidden";
+}
+
+function projectPublishSets() {
+  const dir = path.join(root, "projects");
+  const hiddenJson = new Set();
+  const hiddenHtml = new Set();
+  const publishedHtml = new Set();
+  if (!fs.existsSync(dir)) return { hiddenJson, hiddenHtml, publishedHtml };
+  for (const name of fs.readdirSync(dir)) {
+    if (!name.endsWith(".json")) continue;
+    const project = JSON.parse(fs.readFileSync(path.join(dir, name), "utf8"));
+    const htmlValue = fieldValue(project.html_file || project.student_file);
+    const htmlLink = localHtmlPath(htmlValue).split(/[?#]/)[0];
+    if (isHidden(project)) {
+      hiddenJson.add(name);
+      if (htmlLink) hiddenHtml.add(htmlLink);
+    } else if (htmlLink) {
+      publishedHtml.add(htmlLink);
+    }
+  }
+  return { hiddenJson, hiddenHtml, publishedHtml };
 }
 
 fs.mkdirSync(dist, { recursive: true });
@@ -22,10 +50,19 @@ for (const entry of fs.readdirSync(dist)) {
 fs.copyFileSync(path.join(root, "index.html"), path.join(dist, "index.html"));
 fs.mkdirSync(path.join(dist, "team"), { recursive: true });
 fs.copyFileSync(path.join(root, "team", "index.html"), path.join(dist, "team", "index.html"));
-fs.copyFileSync(path.join(root, "events.json"), path.join(dist, "events.json"));
+const eventsFile = path.join(root, "events.json");
+const events = JSON.parse(fs.readFileSync(eventsFile, "utf8"));
+const publishedEvents = Array.isArray(events) ? events.filter((event) => !isHidden(event)) : [];
+fs.writeFileSync(path.join(dist, "events.json"), JSON.stringify(publishedEvents, null, 2) + "\n");
 copyDir(path.join(root, "assets"), path.join(dist, "assets"));
 copyDir(path.join(root, "media"), path.join(dist, "media"));
-copyDir(path.join(root, "projects"), path.join(dist, "projects"));
+const projectSets = projectPublishSets();
+copyDir(path.join(root, "projects"), path.join(dist, "projects"), (rel) => {
+  const fileName = rel.split("/").pop();
+  if (fileName.endsWith(".json") && projectSets.hiddenJson.has(fileName)) return true;
+  const publicPath = `/projects/${rel}`;
+  return projectSets.hiddenHtml.has(publicPath) && !projectSets.publishedHtml.has(publicPath);
+});
 copyDir(path.join(root, "events"), path.join(dist, "events"));
 fs.mkdirSync(path.join(dist, "news"), { recursive: true });
 fs.copyFileSync(path.join(root, "news", "index.html"), path.join(dist, "news", "index.html"));
@@ -93,7 +130,7 @@ if (fs.existsSync(projectsDir)) {
     const project = JSON.parse(fs.readFileSync(path.join(projectsDir, name), "utf8"));
     const description = project.description || project.summary || "";
     const liveLink = projectLink(project);
-    if (!project.title || !liveLink) continue;
+    if (!project.title || !liveLink || isHidden(project)) continue;
     projects.push({
       title: String(project.title),
       authors: nameList(project.author),
@@ -114,30 +151,37 @@ console.log(`Wrote ${projects.length} project(s) to projects.json`);
 const teamDir = path.join(root, "team");
 const rootTeamPath = path.join(root, "team.json");
 const team = [];
+const teamRecordsAll = [];
+let sawTeamFiles = false;
 if (fs.existsSync(teamDir)) {
   for (const name of fs.readdirSync(teamDir)) {
     if (!name.endsWith(".json")) continue;
+    sawTeamFiles = true;
     const person = JSON.parse(fs.readFileSync(path.join(teamDir, name), "utf8"));
     if (!person || !person.name) continue;
-    team.push({
+    const record = {
       name: String(person.name),
       role: person.role ? String(person.role) : "",
       focused_role: person.focused_role ? String(person.focused_role) : (person.focus ? String(person.focus) : ""),
       photo: fieldValue(person.photo),
       link: person.link ? String(person.link).trim() : ""
-    });
+    };
+    teamRecordsAll.push(record);
+    if (!isHidden(person)) team.push(record);
   }
 }
-if (team.length > 0) {
+if (sawTeamFiles) {
   const teamManifest = JSON.stringify(team, null, 2);
   fs.writeFileSync(path.join(dist, "team.json"), teamManifest);
   fs.writeFileSync(rootTeamPath, teamManifest);
   console.log(`Wrote ${team.length} team member(s) to team.json`);
 } else if (fs.existsSync(rootTeamPath)) {
-  fs.copyFileSync(rootTeamPath, path.join(dist, "team.json"));
   const saved = JSON.parse(fs.readFileSync(rootTeamPath, "utf8"));
-  const count = Array.isArray(saved) ? saved.length : 0;
-  console.log(`No team member files found; copied existing team.json (${count} member(s)) to dist/`);
+  const published = Array.isArray(saved) ? saved.filter((person) => !isHidden(person)) : [];
+  const teamManifest = JSON.stringify(published, null, 2);
+  fs.writeFileSync(path.join(dist, "team.json"), teamManifest);
+  fs.writeFileSync(rootTeamPath, teamManifest);
+  console.log(`No team member files found; copied existing team.json (${published.length} member(s)) to dist/`);
 } else {
   fs.writeFileSync(path.join(dist, "team.json"), "[]\n");
   console.log("No team members found; wrote an empty team.json to dist/");
@@ -153,7 +197,7 @@ function loadTeamRecords() {
   return Array.isArray(saved) ? saved : [];
 }
 
-const teamRecords = loadTeamRecords();
+const teamRecords = teamRecordsAll.length > 0 ? teamRecordsAll : loadTeamRecords();
 const teamByName = new Map(teamRecords.map((person) => [person.name.trim().toLowerCase(), person]));
 const newsDir = path.join(root, "news");
 const news = [];
@@ -162,7 +206,7 @@ if (fs.existsSync(newsDir)) {
     if (!name.endsWith(".json")) continue;
     const article = JSON.parse(fs.readFileSync(path.join(newsDir, name), "utf8"));
     const slug = slugify(name.replace(/\.json$/i, ""));
-    if (!article || !article.title || !slug) continue;
+    if (!article || !article.title || !slug || isHidden(article)) continue;
     const date = String(article.date || "").slice(0, 10);
     news.push({
       slug,

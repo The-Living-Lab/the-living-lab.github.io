@@ -78,6 +78,10 @@
       return items.map((item) => String(item || "").trim()).filter(Boolean);
     }
 
+    function isPublished(entry) {
+      return String(entry && entry.status || "").trim().toLowerCase() !== "hidden";
+    }
+
     function canOpen(href) {
       if (/^https?:\/\//i.test(href)) return true;
       const pathOnly = href.split(/[?#]/)[0];
@@ -86,7 +90,7 @@
 
     function render(projects) {
       list.replaceChildren();
-      const visible = projects.filter((project) => project && project.title && canOpen(project.live_link || ""));
+      const visible = projects.filter((project) => project && project.title && isPublished(project) && canOpen(project.live_link || ""));
       count.textContent = visible.length === 1 ? "1 project" : `${visible.length} projects`;
       empty.hidden = visible.length > 0;
 

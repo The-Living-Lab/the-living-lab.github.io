@@ -39,12 +39,28 @@ content:
     filename: "{primary}.json"
     view:
       primary: title
-      fields: [title, authors, guest_authors, project_type, description]
+      fields: [title, status, authors, guest_authors, project_type, description]
+      sort: [status, title]
+      default:
+        sort: status
+        order: desc
     fields:
       - name: title
         label: Project Title
         type: string
         required: true
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: published
+        description: Published entries appear on the website. Hidden entries stay in Pages CMS.
+        options:
+          values:
+            - name: published
+              label: Published
+            - name: hidden
+              label: Hidden
       - name: authors
         label: Living Lab Team Authors
         type: reference
@@ -108,12 +124,28 @@ content:
     filename: "{primary}.json" # Each member gets their own file (e.g., jane-doe.json)
     view:
       primary: name
-      fields: [name, role, focused_role]
+      fields: [name, status, role, focused_role]
+      sort: [status, name]
+      default:
+        sort: status
+        order: desc
     fields:
       - name: name
         label: Name
         type: string
         required: true
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: published
+        description: Published entries appear on the website. Hidden entries stay in Pages CMS.
+        options:
+          values:
+            - name: published
+              label: Published
+            - name: hidden
+              label: Hidden
       - name: role
         label: Role
         type: select
@@ -141,12 +173,28 @@ content:
     list: true
     view:
       primary: title
-      fields: [title, date]
+      fields: [title, status, date]
+      sort: [status, date]
+      default:
+        sort: status
+        order: desc
     fields:
       - name: title
         label: Title
         type: string
         required: true
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: published
+        description: Published entries appear on the website. Hidden entries stay in Pages CMS.
+        options:
+          values:
+            - name: published
+              label: Published
+            - name: hidden
+              label: Hidden
       - name: date
         label: Date
         type: date
@@ -169,12 +217,28 @@ content:
     filename: "{primary}.json"
     view:
       primary: title
-      fields: [title, date, authors, guest_authors]
+      fields: [title, status, date, authors, guest_authors]
+      sort: [status, date]
+      default:
+        sort: status
+        order: desc
     fields:
       - name: title
         label: Title
         type: string
         required: true
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: published
+        description: Published entries appear on the website. Hidden entries stay in Pages CMS.
+        options:
+          values:
+            - name: published
+              label: Published
+            - name: hidden
+              label: Hidden
       - name: date
         label: Date
         type: date

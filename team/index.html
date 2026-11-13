@@ -55,6 +55,10 @@
     const count = document.querySelector("#team-count");
     const empty = document.querySelector("#team-empty");
 
+    function isPublished(entry) {
+      return String(entry && entry.status || "").trim().toLowerCase() !== "hidden";
+    }
+
     function assetUrl(value) {
       if (!value) return "";
       const splitAt = value.search(/[?#]/);
@@ -145,7 +149,7 @@
 
     function render(members) {
       list.replaceChildren();
-      const people = members.filter((person) => person && person.name);
+      const people = members.filter((person) => person && person.name && isPublished(person));
       count.textContent = people.length === 1 ? "1 person" : `${people.length} people`;
       empty.hidden = people.length > 0;
 

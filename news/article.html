@@ -51,6 +51,10 @@
     const slug = document.body.dataset.article;
     const main = document.querySelector("#article");
 
+    function isPublished(entry) {
+      return String(entry && entry.status || "").trim().toLowerCase() !== "hidden";
+    }
+
     function assetUrl(value) {
       if (!value) return "";
       const splitAt = value.search(/[?#]/);
@@ -246,7 +250,7 @@
       .then((response) => (response.ok ? response.json() : []))
       .then((data) => {
         const articles = Array.isArray(data) ? data : [];
-        const article = articles.find((item) => item && item.slug === slug);
+        const article = articles.find((item) => item && item.slug === slug && isPublished(item));
         if (article) show(article);
       })
       .catch(() => {});
