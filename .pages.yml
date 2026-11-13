@@ -1,4 +1,9 @@
 media:
+  - name: general
+    label: General Images
+    input: media/general
+    output: /media/general
+    categories: [image]
   - name: projects
     label: Project Thumbnails
     input: media/projects
