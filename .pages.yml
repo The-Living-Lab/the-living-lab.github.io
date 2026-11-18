@@ -1,9 +1,4 @@
 media:
-  - name: general
-    label: General Images
-    input: media/general
-    output: /media/general
-    categories: [image]
   - name: projects
     label: Project Thumbnails
     input: media/projects
@@ -30,6 +25,17 @@ media:
     input: media/news
     output: /media/news
     categories: [image]
+  - name: general
+    label: General Images
+    input: media/general
+    output: /media/general
+    categories: [image]
+  - name: stone-serif-itc-pro
+    label: Font stone-serif-itc-pro
+    input: public/fonts/stone-serif-itc-pro
+    output: /fonts/stone-serif-itc-pro
+    categories: [font]
+    extensions: [otf, ttf, woff, woff2]
 
 content:
   - name: projects
