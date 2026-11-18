@@ -30,11 +30,6 @@ media:
     input: media/general
     output: /media/general
     categories: [image]
-  - name: fonts
-    label: Fonts
-    input: public/fonts
-    output: /fonts
-    extensions: [otf, woff, woff2, ttf]
 
 content:
   - name: projects
