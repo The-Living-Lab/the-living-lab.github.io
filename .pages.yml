@@ -30,16 +30,11 @@ media:
     input: media/general
     output: /media/general
     categories: [image]
-  - name: fonts
-    label: Fonts
-    input: public/fonts
-    output: /fonts
-    extensions: [otf, woff, woff2, ttf]
   - name: stone-serif-itc-pro
     label: stone-serif-itc-pro
     input: public/fonts/stone-serif-itc-pro
     output: /fonts/stone-serif-itc-pro
-    extensions: [otf, woff, woff2, ttf]
+    categories: [font]
 
 content:
   - name: projects
