@@ -1,9 +1,4 @@
 media:
-  - name: general
-    label: General Images
-    input: media/general
-    output: /media/general
-    categories: [image]
   - name: projects
     label: Project Thumbnails
     input: media/projects
@@ -30,6 +25,16 @@ media:
     input: media/news
     output: /media/news
     categories: [image]
+  - name: general
+    label: General Images
+    input: media/general
+    output: /media/general
+    categories: [image]
+  - name: fonts
+    label: Fonts
+    input: public/fonts
+    output: /fonts
+    extensions: [otf, woff, woff2, ttf]
 
 content:
   - name: projects
