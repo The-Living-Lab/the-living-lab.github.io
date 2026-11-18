@@ -30,8 +30,8 @@ media:
     input: media/general
     output: /media/general
     categories: [image]
-  - name: Font stone-serif-itc-pro
-    label: stone-serif-itc-pro
+  - name: stone-serif-itc-pro
+    label: Font stone-serif-itc-pro
     input: public/fonts/stone-serif-itc-pro
     output: /fonts/stone-serif-itc-pro
     extensions: [.otf, .woff2, .woff, .ttf]
