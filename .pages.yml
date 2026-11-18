@@ -34,7 +34,8 @@ media:
     label: Font stone-serif-itc-pro
     input: public/fonts/stone-serif-itc-pro
     output: /fonts/stone-serif-itc-pro
-    extensions: [.OTF, .woff2, .woff, .ttf]
+    categories: [font]
+    extensions: [otf, ttf, woff, woff2]
 
 content:
   - name: projects
