@@ -60,7 +60,7 @@ content:
             - name: published
               label: Published
             - name: hidden
-              label: Hidden
+              label: Hidden from live site, saved on GitHub
       - name: authors
         label: Living Lab Team Authors
         type: reference
