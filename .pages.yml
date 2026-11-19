@@ -194,7 +194,7 @@ content:
             - name: published
               label: Published
             - name: hidden
-              label: Hidden
+              label: Hidden from live site, still in GitHub
       - name: date
         label: Date
         type: date
