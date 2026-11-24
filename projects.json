@@ -68,12 +68,21 @@
     "live_link": "https://claude.ai/artifact/1AvRdPzJcL3ZSjHYiB1aHX"
   },
   {
-    "title": "What happens when both deployed app and html are input",
+    "title": "test-html",
     "authors": [],
     "guest_authors": [],
     "description": "",
     "thumbnail": "",
-    "project_type": "html",
-    "live_link": "/projects/html/Firefly Jar.html"
+    "project_type": "app",
+    "live_link": "https://the-living-lab.github.io/test-html/"
+  },
+  {
+    "title": "Vercel",
+    "authors": [],
+    "guest_authors": [],
+    "description": "",
+    "thumbnail": "",
+    "project_type": "app",
+    "live_link": "https://test-lab-member.vercel.app/"
   }
 ]
