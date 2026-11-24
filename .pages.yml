@@ -1,13 +1,13 @@
 media:
-  - name: projects_images
+  - name: projects-thumbnails
     label: Project Thumbnails
-    input: media/projects_images
-    output: /media/projects_images
+    input: media/projects-thumbnails
+    output: /media/projects-thumbnails
     categories: [image]
-  - name: projects_html
+  - name: projects-html
     label: Project HTML Files
-    input: media/projects_html
-    output: /media/projects_html
+    input: media/projects-html
+    output: /media/projects-html
     extensions: [html, htm]
     rename: safe
   - name: team
