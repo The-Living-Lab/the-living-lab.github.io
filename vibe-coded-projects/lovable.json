@@ -4,12 +4,6 @@
   "authors": [
     "Cina He"
   ],
-  "guest_authors": [
-    {
-      "name": "Colin Tomey",
-      "photo": "/media/guests/goldfish-ezgifcom-webp-to-jpg-converter.jpg"
-    }
-  ],
-  "project_type": "app",
-  "live_link": "https://wiki.pennai-pedagogy.org/"
+  "project-type": "app",
+  "live-link": "https://wiki.pennai-pedagogy.org/"
 }
