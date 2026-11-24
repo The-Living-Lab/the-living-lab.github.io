@@ -126,7 +126,7 @@ content:
     filename: "{primary}.json" # Each member gets their own file (e.g., jane-doe.json)
     view:
       primary: name
-      fields: [name, status, role, focused_role]
+      fields: [name, status, role, role_description]
       sort: [status, name]
       default:
         sort: status
@@ -149,13 +149,13 @@ content:
             - name: hidden
               label: Hidden
       - name: role
-        label: Role
+        label: General Role
         type: select
         required: true
         options:
           values: ["Leadership Team", "Participating Faculty", "Current Lab Member", "Lab Alumni"]
-      - name: focused_role
-        label: Focused Role Description
+      - name: role_description
+        label: Role Description
         type: string
       - name: photo
         label: Photo
