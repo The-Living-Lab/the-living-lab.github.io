@@ -34,7 +34,7 @@ media:
 
 content:
   - name: vibe-coded-projects
-    label: Vibe-CodedProjects
+    label: Vibe-Coded Projects
     type: collection
     path: vibe-coded-projects       # The GitHub folder where the project data is saved
     filename: "{primary}.json"
