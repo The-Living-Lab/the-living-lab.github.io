@@ -1,7 +1,7 @@
 {
   "title": "Both deployed app and html links are input",
   "status": "published",
-  "project-type": "html",
+  "project-type": "app",
   "live-link": "https://claude.ai/public/artifacts/5dcd7214-289c-499f-9cf3-4ea6bf34eadb",
   "html-file": "/media/projects-html/flappybird.html"
 }
