@@ -6,8 +6,8 @@ media:
     categories: [image]
   - name: project-html
     label: Project HTML Files
-    input: projects/html
-    output: /projects/html
+    input: media/projects-html
+    output: /media/projects-html
     extensions: [html, htm]
     rename: safe
   - name: team
