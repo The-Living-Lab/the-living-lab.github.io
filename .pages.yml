@@ -31,12 +31,14 @@ media:
     output: /media/penn_brand
     categories: [image]
 
+
 content:
   - name: projects
     label: Projects
     type: collection
     path: projects        # The GitHub folder where the project data is saved
     filename: "{primary}.json"
+    
     view:
       primary: title
       fields: [title, status, authors, guest_authors, project_type, description]
@@ -44,11 +46,13 @@ content:
       default:
         sort: status
         order: desc
+        
     fields:
       - name: title
         label: Project Title
         type: string
         required: true
+        
       - name: status
         label: Status
         type: select
@@ -61,6 +65,7 @@ content:
               label: Published
             - name: hidden
               label: Hidden from live site, saved on GitHub
+              
       - name: authors
         label: Living Lab Team Authors
         type: reference
@@ -111,6 +116,8 @@ content:
           media: project-html
           extensions: [html, htm]
           rename: safe
+
+
 
   - name: team
     label: Team
@@ -165,9 +172,11 @@ content:
         type: string
         description: Optional site (e.g. LinkedIn, website) that links directly from the team member's name
 
+
+
   - name: events
     label: Events
-    type: file
+    type: collection
     path: events.json
     format: json
     list: true
@@ -205,10 +214,8 @@ content:
       - name: summary
         label: Summary
         type: text
-      - name: sample
-        label: Sample placeholder
-        type: boolean
-        hint: Turn this on while the event is stand-in copy. The site shows a Sample label.
+
+
 
   - name: news
     label: News
