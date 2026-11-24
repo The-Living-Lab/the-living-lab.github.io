@@ -113,6 +113,8 @@ content:
       - name: project-type
         label: Project type
         type: select
+        required: true
+        default: app
         description: Choose Deployed app for a site that is already online, or HTML file for a page uploaded here. The live site opens whichever one you choose in a new tab.
         options:
           values:
