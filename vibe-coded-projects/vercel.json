@@ -4,6 +4,7 @@
   "authors": [
     "Cina He"
   ],
-  "project_type": "app",
-  "live_link": "https://test-lab-member.vercel.app/"
+  "description": "Cina's East Asian Diplomacy game, deployed on Vercel instead of Lovable",
+  "project-type": "app",
+  "live-link": "https://test-lab-member.vercel.app/"
 }
