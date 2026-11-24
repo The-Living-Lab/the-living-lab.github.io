@@ -4,10 +4,10 @@ media:
     input: media/projects
     output: /media/projects
     categories: [image]
-  - name: projects-html
+  - name: projects_html
     label: Project HTML Files
-    input: media/projects-html
-    output: /media/projects-html
+    input: media/projects_html
+    output: /media/projects_html
     extensions: [html, htm]
     rename: safe
   - name: team
@@ -113,7 +113,7 @@ content:
         type: file
         description: Upload an HTML file here for this project.
         options:
-          media: projects-html
+          media: projects_html
           extensions: [html, htm]
           rename: safe
 
