@@ -27,7 +27,7 @@ media:
     categories: [image]
   - name: penn_brand
     label: Penn Brand Images and Logos
-    input: media/penn_brand
+    input: media/general
     output: /media/penn_brand
     categories: [image]
 
