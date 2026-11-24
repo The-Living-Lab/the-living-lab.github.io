@@ -25,16 +25,11 @@ media:
     input: media/news
     output: /media/news
     categories: [image]
-  - name: general
-    label: General Images
-    input: media/general
-    output: /media/general
+  - name: penn_brand
+    label: Penn Brand Images and Logos
+    input: media/penn_brand
+    output: /media/penn_brand
     categories: [image]
-  - name: penn_brand_images
-    label: Penn Brand Images
-    input: media/general/penn-brand
-    output: /media/general/penn-brand
-    categories: [image]  
 
 content:
   - name: projects
