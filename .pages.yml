@@ -126,7 +126,7 @@ content:
     filename: "{primary}.json" # Each member gets their own file (e.g., jane-doe.json)
     view:
       primary: name
-      fields: [name, status, role, role_description]
+      fields: [name, status, role, focus]
       sort: [status, name]
       default:
         sort: status
@@ -154,9 +154,13 @@ content:
         required: true
         options:
           values: ["Leadership Team", "Participating Faculty", "Current Lab Member", "Lab Alumni"]
-      - name: role_description
-        label: Role Description
+      - name: focus
+        label: Short Description or Title
         type: string
+      - name: bio
+        label: Full Description or Bio
+        type: rich-text
+        description: Supports multiple paragraphs, bold/italics, bullet lists, and links. DO NOT add headings or extra images here 
       - name: photo
         label: Photo
         type: image
