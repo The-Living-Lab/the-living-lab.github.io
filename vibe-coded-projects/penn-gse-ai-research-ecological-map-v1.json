@@ -1,6 +1,9 @@
 {
   "title": "Penn GSE AI research ecological map v1",
   "status": "published",
+  "authors": [
+    "Nam Nguyen"
+  ],
   "project-type": "app",
   "live-link": "https://claude.ai/artifact/1AvRdPzJcL3ZSjHYiB1aHX"
 }
