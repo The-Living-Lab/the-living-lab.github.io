@@ -5,7 +5,9 @@
     "Cina He"
   ],
   "guest_authors": [
-    "Colin Tomey"
+    {
+      "name": "Colin Tomey"
+    }
   ],
   "project_type": "app",
   "live_link": "https://wiki.pennai-pedagogy.org/"
