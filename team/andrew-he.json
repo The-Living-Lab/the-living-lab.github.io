@@ -1,13 +1,8 @@
 {
   "name": "Andrew He",
   "status": "published",
-<<<<<<< HEAD
-  "role": "Current Lab Members",
-  "role_description": "PennAI Pedagogy Initiative Fellow",
-=======
   "role": "Current Lab Member",
   "focus": "PennAI Pedagogy Initiative Fellow",
   "photo": "/media/team/he-andrew.webp",
->>>>>>> e3660249aefbc5d3e105d561fd8741ab86e77bc5
   "link": "https://www.linkedin.com/in/andrew-he-6b656b1b8/"
 }
