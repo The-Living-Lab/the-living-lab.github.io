@@ -65,13 +65,14 @@ content:
         label: Living Lab Team Authors
         type: reference
         required: false
+        description: Only existing team members in the "Team" content page can be selected here
         options:
           collection: team
           multiple: true
           value: "{fields.name}"
           label: "{fields.name}"
           search: [fields.name]
-        description: Only existing team members in the "Team" content page can be selected here
+    
       - name: guest_authors
         label: Guest Authors
         type: string
