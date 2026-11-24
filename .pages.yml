@@ -1,8 +1,8 @@
 media:
-  - name: projects
+  - name: projects_images
     label: Project Thumbnails
-    input: media/projects
-    output: /media/projects
+    input: media/projects_images
+    output: /media/projects_images
     categories: [image]
   - name: projects_html
     label: Project HTML Files
@@ -90,7 +90,7 @@ content:
         label: Thumbnail Image
         type: image
         options:
-          media: projects
+          media: projects_images
       - name: project_type
         label: Project type
         type: select
