@@ -36,7 +36,7 @@ content:
   - name: projects
     label: Projects
     type: collection
-    path: projects        # The GitHub folder where the project data is saved
+    path: projects       # The GitHub folder where the project data is saved
     filename: "{primary}.json"
     
     view:
