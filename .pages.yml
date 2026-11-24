@@ -31,12 +31,14 @@ media:
     output: /media/penn_brand
     categories: [image]
 
+
 content:
   - name: projects
     label: Projects
     type: collection
     path: projects        # The GitHub folder where the project data is saved
     filename: "{primary}.json"
+    
     view:
       primary: title
       fields: [title, status, authors, guest_authors, project_type, description]
@@ -44,11 +46,13 @@ content:
       default:
         sort: status
         order: desc
+        
     fields:
       - name: title
         label: Project Title
         type: string
         required: true
+        
       - name: status
         label: Status
         type: select
@@ -61,6 +65,7 @@ content:
               label: Published
             - name: hidden
               label: Hidden from live site, saved on GitHub
+              
       - name: authors
         label: Living Lab Team Authors
         type: reference
@@ -99,25 +104,20 @@ content:
       - name: live_link
         label: Deployed app address
         type: string
-        when:
-          field: project_type
-          equals: app
         description: Fill this in for a deployed app.
         pattern:
           regex: "^$|^https?://.+"
           message: Enter a full address starting with http:// or https://
-
       - name: html_file
         label: HTML file
         type: file
-        when:
-          field: project_type
-          equals: html
         description: Upload an HTML file here for this project.
         options:
           media: project-html
           extensions: [html, htm]
           rename: safe
+
+
 
   - name: team
     label: Team
@@ -152,6 +152,7 @@ content:
         label: General Role
         type: select
         required: true
+        default: Current Lab Members
         options:
           values: ["Leadership Team", "Participating Faculty", "Current Lab Members", "Lab Alumni"]
       - name: focus
@@ -171,9 +172,11 @@ content:
         type: string
         description: Optional site (e.g. LinkedIn, website) that links directly from the team member's name
 
+
+
   - name: events
     label: Events
-    type: file
+    type: collection
     path: events.json
     format: json
     list: true
@@ -211,10 +214,8 @@ content:
       - name: summary
         label: Summary
         type: text
-      - name: sample
-        label: Sample placeholder
-        type: boolean
-        hint: Turn this on while the event is stand-in copy. The site shows a Sample label.
+
+
 
   - name: news
     label: News
