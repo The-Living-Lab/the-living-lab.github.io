@@ -1,6 +1,10 @@
 {
   "title": "test-html",
   "status": "published",
-  "project_type": "app",
-  "live_link": "https://the-living-lab.github.io/test-html/"
+  "authors": [
+    "Andrew He"
+  ],
+  "description": "Testing html in separate repo with its own link",
+  "project-type": "app",
+  "live-link": "https://the-living-lab.github.io/test-html/"
 }
