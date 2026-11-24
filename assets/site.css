@@ -437,6 +437,15 @@ a.event-card:hover { border-color: var(--hover); }
   font-size: 0.95rem;
 }
 
+.byline-photo {
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-right: 0.35rem;
+  object-fit: cover;
+  vertical-align: -0.3em;
+  border-radius: 50%;
+}
+
 .article-hero {
   display: block;
   width: 100%;

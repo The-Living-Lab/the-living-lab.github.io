@@ -73,10 +73,41 @@
       return icon;
     }
 
-    function nameList(value) {
+    function peopleList(value) {
       if (!value) return [];
       const items = Array.isArray(value) ? value : [value];
-      return items.map((item) => String(item || "").trim()).filter(Boolean);
+      return items.flatMap((item) => {
+        if (typeof item === "string") {
+          const name = item.trim();
+          return name ? [{ name }] : [];
+        }
+        if (item && typeof item === "object") {
+          const name = String(item.name || item.label || item.value || "").trim();
+          if (!name) return [];
+          const photo = typeof item.photo === "string" ? item.photo.trim() : "";
+          return [photo ? { name, photo } : { name }];
+        }
+        return [];
+      });
+    }
+
+    function appendPeople(card, people, label) {
+      if (!people.length) return;
+      const byline = document.createElement("p");
+      byline.className = "byline";
+      if (label) byline.append(document.createTextNode(`${label} `));
+      people.forEach((person, index) => {
+        if (index) byline.append(document.createTextNode(", "));
+        if (person.photo) {
+          const image = document.createElement("img");
+          image.className = "byline-photo";
+          image.src = assetUrl(person.photo);
+          image.alt = "";
+          byline.append(image);
+        }
+        byline.append(document.createTextNode(person.name));
+      });
+      card.append(byline);
     }
 
     function isPublished(entry) {
@@ -121,20 +152,8 @@
         title.append(hint);
         card.append(title);
 
-        const authors = nameList(project.authors);
-        const guests = nameList(project.guest_authors);
-        if (authors.length) {
-          const byline = document.createElement("p");
-          byline.className = "byline";
-          byline.textContent = authors.join(", ");
-          card.append(byline);
-        }
-        if (guests.length) {
-          const byline = document.createElement("p");
-          byline.className = "byline";
-          byline.textContent = `Guest authors: ${guests.join(", ")}`;
-          card.append(byline);
-        }
+        appendPeople(card, peopleList(project.authors));
+        appendPeople(card, peopleList(project.guest_authors), "Guest authors:");
 
         if (project.description) {
           const summary = document.createElement("p");

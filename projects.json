@@ -1,9 +1,7 @@
 [
   {
     "title": "Claude",
-    "authors": [
-      "public"
-    ],
+    "authors": [],
     "guest_authors": [],
     "description": "Get ready to have your mind bent with this 3D physics simulation. It’s like someone gave AI the keys to a virtual sandbox and said, “Go wild!”",
     "thumbnail": "",
@@ -17,18 +15,16 @@
     ],
     "guest_authors": [],
     "description": "",
-    "thumbnail": "/media/projects_images/Goldfish-ezgif.com-webp-to-jpg-converter.jpg",
+    "thumbnail": "/media/projects-thumbnails/Goldfish-ezgif.com-webp-to-jpg-converter.jpg",
     "project_type": "html",
-    "live_link": "/media/projects_html/flappybird.html"
+    "live_link": "/media/projects-html/flappybird.html"
   },
   {
     "title": "Lovable PAPI Wiki",
     "authors": [
       "Cina He"
     ],
-    "guest_authors": [
-      "Colin Tomey"
-    ],
+    "guest_authors": [],
     "description": "",
     "thumbnail": "",
     "project_type": "app",
@@ -47,9 +43,11 @@
   },
   {
     "title": "test-html",
-    "authors": [],
+    "authors": [
+      "Andrew He"
+    ],
     "guest_authors": [],
-    "description": "",
+    "description": "Testing html in separate repo with its own link",
     "thumbnail": "",
     "project_type": "app",
     "live_link": "https://the-living-lab.github.io/test-html/"
@@ -60,7 +58,7 @@
       "Cina He"
     ],
     "guest_authors": [],
-    "description": "",
+    "description": "Cina's East Asian Diplomacy game, deployed on Vercel instead of Lovable",
     "thumbnail": "",
     "project_type": "app",
     "live_link": "https://test-lab-member.vercel.app/"

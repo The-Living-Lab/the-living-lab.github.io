@@ -85,15 +85,40 @@ function nameList(value) {
   });
 }
 
+function cmsField(entry, currentName, previousName) {
+  const current = entry[currentName];
+  if (current !== undefined && current !== null && current !== "") return current;
+  return entry[previousName];
+}
+
+function peopleList(value) {
+  if (!value) return [];
+  const items = Array.isArray(value) ? value : [value];
+  return items.flatMap((item) => {
+    if (typeof item === "string") {
+      const name = item.trim();
+      return name ? [{ name }] : [];
+    }
+    if (item && typeof item === "object") {
+      const name = String(item.name || item.label || item.value || "").trim();
+      if (!name) return [];
+      const photo = fieldValue(item.photo);
+      return [photo ? { name, photo } : { name }];
+    }
+    return [];
+  });
+}
+
 function projectLink(project) {
-  const type = projectType(project.project_type);
-  const appLink = fieldValue(project.live_link);
-  const htmlValue = fieldValue(project.html_file || project.student_file);
+  const type = projectType(cmsField(project, "project-type", "project_type"));
+  const appLink = fieldValue(cmsField(project, "live-link", "live_link"));
+  const htmlValue = fieldValue(cmsField(project, "html-file", "html_file") || project.student_file);
   const htmlLink = localHtmlPath(htmlValue) || (isHttp(htmlValue) && /\.html?($|[?#])/i.test(htmlValue) ? htmlValue : "");
   if (type === "html") return htmlLink;
   if (type === "app") return isHttp(appLink) ? appLink : "";
-  if (isHttp(appLink)) return appLink;
-  return htmlLink;
+  const appOk = isHttp(appLink) ? appLink : "";
+  if (appOk && htmlLink) return "";
+  return appOk || htmlLink;
 }
 
 const projectsDir = path.join(root, "vibe-coded-projects");
@@ -104,14 +129,15 @@ if (fs.existsSync(projectsDir)) {
     const project = JSON.parse(fs.readFileSync(path.join(projectsDir, name), "utf8"));
     const description = project.description || project.summary || "";
     const liveLink = projectLink(project);
+    const type = projectType(cmsField(project, "project-type", "project_type"));
     if (!project.title || !liveLink || isHidden(project)) continue;
     projects.push({
       title: String(project.title),
       authors: nameList(project.authors || project.author),
-      guest_authors: nameList(project.guest_authors),
+      guest_authors: peopleList(cmsField(project, "guest-authors", "guest_authors")),
       description: String(description),
       thumbnail: fieldValue(project.thumbnail),
-      project_type: projectType(project.project_type) || (isHttp(liveLink) ? "app" : "html"),
+      project_type: type || (isHttp(liveLink) ? "app" : "html"),
       live_link: liveLink
     });
   }
