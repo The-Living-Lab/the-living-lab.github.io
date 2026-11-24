@@ -141,7 +141,7 @@ content:
         type: select
         required: true
         default: published
-        description: Published entries appear on the website, hidden entries stay in Pages CMS
+        description: Published entries appear on the live site, hidden entries stay in Pages CMS and the GitHub repo
         options:
           values:
             - name: published
@@ -155,6 +155,7 @@ content:
         default: Current Lab Members
         options:
           values: ["Leadership Team", "Participating Faculty", "Current Lab Members", "Lab Alumni"]
+        description: This directly corresponds to how the team is grouped on the live site
       - name: focus
         label: Short Description or Title
         type: string
