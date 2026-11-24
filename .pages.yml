@@ -25,10 +25,10 @@ media:
     input: media/news
     output: /media/news
     categories: [image]
-  - name: general
-    label: General Images
+  - name: penn_brand
+    label: Penn Brand Images and Logos
     input: media/general
-    output: /media/general
+    output: /media/penn_brand
     categories: [image]
 
 content:
@@ -60,17 +60,19 @@ content:
             - name: published
               label: Published
             - name: hidden
-              label: Hidden
+              label: Hidden from live site, saved on GitHub
       - name: authors
         label: Living Lab Team Authors
         type: reference
         required: false
+        description: Only existing team members in the "Team" content page can be selected here
         options:
           collection: team
           multiple: true
           value: "{fields.name}"
           label: "{fields.name}"
-          search: [fields.name]          
+          search: [fields.name]
+    
       - name: guest_authors
         label: Guest Authors
         type: string
@@ -124,7 +126,7 @@ content:
     filename: "{primary}.json" # Each member gets their own file (e.g., jane-doe.json)
     view:
       primary: name
-      fields: [name, status, role, focused_role]
+      fields: [name, status, role, role_description]
       sort: [status, name]
       default:
         sort: status
@@ -147,13 +149,13 @@ content:
             - name: hidden
               label: Hidden
       - name: role
-        label: Role
+        label: General Role
         type: select
         required: true
         options:
           values: ["Leadership Team", "Participating Faculty", "Current Lab Member", "Lab Alumni"]
-      - name: focused_role
-        label: Focused Role Description
+      - name: role_description
+        label: Role Description
         type: string
       - name: photo
         label: Photo
@@ -163,7 +165,7 @@ content:
       - name: link
         label: Link
         type: string
-        hint: Optional site (e.g. LinkedIn, website) This does not create a profile page.
+        description: Optional site (e.g. LinkedIn, website) This does not create a profile page.
 
   - name: events
     label: Events
@@ -194,7 +196,7 @@ content:
             - name: published
               label: Published
             - name: hidden
-              label: Hidden
+              label: Hidden from live site, still in GitHub
       - name: date
         label: Date
         type: date
