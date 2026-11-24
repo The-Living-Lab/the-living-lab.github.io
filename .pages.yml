@@ -141,7 +141,7 @@ content:
         type: select
         required: true
         default: published
-        description: Published entries appear on the website. Hidden entries stay in Pages CMS.
+        description: Published entries appear on the website, hidden entries stay in Pages CMS
         options:
           values:
             - name: published
