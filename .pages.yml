@@ -113,7 +113,7 @@ content:
         type: file
         description: Upload an HTML file here for this project.
         options:
-          media: project-html
+          media: projects-html
           extensions: [html, htm]
           rename: safe
 
