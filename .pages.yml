@@ -181,7 +181,7 @@ content:
       - name: bio
         label: Full Description or Bio
         type: rich-text
-        description: DO NOT add headings or extra images here 
+        description: DO NOT add headings or extra images here, it may mess up live site 
       - name: photo
         label: Photo
         type: image
