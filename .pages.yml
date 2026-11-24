@@ -4,7 +4,7 @@ media:
     input: media/projects
     output: /media/projects
     categories: [image]
-  - name: project-html
+  - name: projects-html
     label: Project HTML Files
     input: media/projects-html
     output: /media/projects-html
