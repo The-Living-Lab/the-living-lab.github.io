@@ -33,10 +33,10 @@ media:
 
 
 content:
-  - name: projects
-    label: Projects
+  - name: vibe-coded-projects
+    label: Vibe-CodedProjects
     type: collection
-    path: projects       # The GitHub folder where the project data is saved
+    path: vibe-coded-projects       # The GitHub folder where the project data is saved
     filename: "{primary}.json"
     
     view:
