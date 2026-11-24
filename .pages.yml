@@ -94,7 +94,7 @@ content:
       - name: project_type
         label: Project type
         type: select
-        description: Choose Deployed app for a site that is already online, or HTML file for a page uploaded here. The website opens whichever one you choose in a new tab.
+        description: Choose Deployed app for a site that is already online, or HTML file for a page uploaded here. The live site opens whichever one you choose in a new tab.
         options:
           values:
             - name: app
