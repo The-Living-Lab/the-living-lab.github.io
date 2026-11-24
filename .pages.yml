@@ -30,6 +30,11 @@ media:
     input: media/general
     output: /media/general
     categories: [image]
+  - name: penn_brand_images
+    label: Penn Brand Images
+    input: media/general/penn-brand
+    output: /media/general/penn-brand
+    categories: [image]  
 
 content:
   - name: projects
