@@ -176,7 +176,7 @@ content:
         default: Current Lab Members
         options:
           values: ["Leadership Team", "Participating Faculty", "Current Lab Members", "Lab Alumni"]
-        description: This directly corresponds to how the team is grouped on the live site
+        description: This directly corresponds to how team members are grouped on the live site
       - name: focus
         label: Short Description or Title
         type: string
