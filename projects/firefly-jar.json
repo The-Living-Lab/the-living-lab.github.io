@@ -1,9 +1,9 @@
 {
-  "title": "Firefly Jar",
+  "title": "Flappy Bird",
   "status": "published",
-  "author": [
+  "authors": [
     "Andrew He"
   ],
   "project_type": "html",
-  "html_file": "/projects/html/firefly-jar.html"
+  "html_file": "/media/projects_html/flappybird.html"
 }
