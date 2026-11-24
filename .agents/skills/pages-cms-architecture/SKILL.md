@@ -31,7 +31,7 @@ This site is a static Vite + React + TypeScript + Tailwind CSS application where
 ## 3. Field-Specific Rendering Rules
 
 - **Projects (`project_type`):** Treat `project_type` (`app` vs. `html`) as the absolute source of truth—even if both fields contain values. Use `live_link` only when `project_type === 'app'`, and `html_file` only when `project_type === 'html'`. Follow the `.pages.yml` behavior (opening the selected link/HTML file in a new tab, or providing an "Open in new tab" fallback if embedded).
-- **Authors (`projects` & `news`):** Combine `authors` (array of Team member names) and `guest_authors` (array of strings) cleanly, handling cases where either or both arrays are missing or empty.
+- **Authors (`projects` & `news`):** Combine `authors` (array of Team member names) and `guest_authors` (array of {name, photo?}) cleanly, handling cases where either or both arrays are missing or empty.
 - **Team & News Rich Text:** Render `team.bio` and `news.body` (`rich-text` Markdown strings) with a Markdown renderer styled for dark mode. Link a team member's name to `link` when present.
 
 ## 4. Pages CMS Schema & Media Guardrails

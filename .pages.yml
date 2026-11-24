@@ -15,6 +15,11 @@ media:
     input: media/team
     output: /media/team
     categories: [image]
+  - name: guests
+    label: Guest Author Headshots
+    input: media/guests
+    output: /media/guests
+    categories: [image]
   - name: events
     label: Events Media
     input: media/events
@@ -80,9 +85,23 @@ content:
     
       - name: guest_authors
         label: Guest Authors
-        type: string
+        type: object
         list: true
-        description: Manually type names of authors not in the Team collection.
+        description: Add external collaborators who are not in the Team collection.
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: photo
+            label: Headshot (optional)
+            type: image
+            required: false
+            options:
+              media: guests
+              rename: safe
+              extensions: [jpg, jpeg, png, webp]
+
       - name: description
         label: Description
         type: text
