@@ -1,5 +1,13 @@
 {
   "name": "Joseph Kim",
   "status": "published",
+<<<<<<< HEAD
   "role": "Current Lab Members"
+=======
+  "role": "Leadership Team",
+  "focus": "Ph.D. Candidate",
+  "bio": "Doctoral Student, Penn GSE Learning Science and Technology, Ph.D. Program",
+  "photo": "/media/team/kim-joseph.webp",
+  "link": "https://www.linkedin.com/in/seoulite/"
+>>>>>>> e3660249aefbc5d3e105d561fd8741ab86e77bc5
 }
