@@ -165,7 +165,7 @@ content:
       - name: link
         label: Link
         type: string
-        hint: Optional site (e.g. LinkedIn, website) This does not create a profile page.
+        description: Optional site (e.g. LinkedIn, website) This does not create a profile page.
 
   - name: events
     label: Events
