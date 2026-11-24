@@ -2,42 +2,70 @@
   {
     "name": "Andrew He",
     "role": "Current Lab Members",
-    "focused_role": "",
-    "photo": "",
+    "focused_role": "PennAI Pedagogy Initiative Fellow",
+    "photo": "/media/team/he-andrew.webp",
     "link": "https://www.linkedin.com/in/andrew-he-6b656b1b8/"
   },
   {
     "name": "Anuujin Tsedenbal",
     "role": "Current Lab Members",
-    "focused_role": "",
-    "photo": "",
-    "link": ""
+    "focused_role": "Living Laboratory Graduate Assistant",
+    "photo": "/media/team/tsedenbal-anuujin.webp",
+    "link": "https://www.linkedin.com/in/anuujin-tsedenbal/"
+  },
+  {
+    "name": "Bodong Chen",
+    "role": "Leadership Team",
+    "focused_role": "Co-Director",
+    "photo": "/media/team/chen-bodong.webp",
+    "link": "https://www.gse.upenn.edu/faculty/bodong-chen"
   },
   {
     "name": "Cina He",
     "role": "Current Lab Members",
-    "focused_role": "PAPI Lab Fellow",
-    "photo": "/media/projects/Goldfish-ezgif.com-webp-to-jpg-converter-1.jpg",
-    "link": ""
+    "focused_role": "PennAI Pedagogy Initiative Fellow",
+    "photo": "/media/team/he-cina.webp",
+    "link": "https://www.linkedin.com/in/xinrancinahe/"
+  },
+  {
+    "name": "Ethan Williams",
+    "role": "Current Lab Members",
+    "focused_role": "PennAI Pedagogy Initiative Fellow",
+    "photo": "/media/team/williams-ethan.webp",
+    "link": "https://www.linkedin.com/in/ethan-williams-5b1595186/"
+  },
+  {
+    "name": "Helen Jin",
+    "role": "Leadership Team",
+    "focused_role": "Ph.D. Candidate",
+    "photo": "/media/team/jin-helen.webp",
+    "link": "https://helenjin.github.io/"
   },
   {
     "name": "Joseph Kim",
+    "role": "Leadership Team",
+    "focused_role": "Ph.D. Candidate",
+    "photo": "/media/team/kim-joseph.webp",
+    "link": "https://www.linkedin.com/in/seoulite/"
+  },
+  {
+    "name": "Mai Vuong",
     "role": "Current Lab Members",
-    "focused_role": "",
-    "photo": "",
-    "link": ""
+    "focused_role": "PennAI Pedagogy Initiative Fellow",
+    "photo": "/media/team/vuong-mai.webp",
+    "link": "https://www.linkedin.com/in/mai-que-vuong/"
   },
   {
     "name": "Nam Nguyen",
     "role": "Leadership Team",
-    "focused_role": "Senior Research Manager, AI & Education, Penn GSE",
-    "photo": "",
-    "link": ""
+    "focused_role": "Lab Manager",
+    "photo": "/media/team/nguyen-nam.webp",
+    "link": "https://www.linkedin.com/in/nam-nguyenhoang/"
   },
   {
     "name": "Seiji Isotani",
     "role": "Leadership Team",
-    "focused_role": "Associate Professor, Faculty Director of Learning Analytics and Artificial Intelligence Program, Penn GSE",
+    "focused_role": "Co-Director",
     "photo": "/media/team/isotani-seiji-headshot.jpg.webp",
     "link": "https://www.gse.upenn.edu/faculty/seiji-isotani"
   },
@@ -47,5 +75,12 @@
     "focused_role": "PennAI Pedagogy Initiative Fellow",
     "photo": "/media/team/ahmad-shayan.jpeg.webp",
     "link": "https://www.linkedin.com/in/shayanahmad7/"
+  },
+  {
+    "name": "Shruti Mehta",
+    "role": "Leadership Team",
+    "focused_role": "Ph.D. Candidate",
+    "photo": "/media/team/mehta-shruti.webp",
+    "link": "https://www.linkedin.com/in/shruti-mehta-19466121a/"
   }
 ]

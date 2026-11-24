@@ -22,27 +22,6 @@ function isHidden(entry) {
   return String(entry && entry.status || "").trim().toLowerCase() === "hidden";
 }
 
-function projectPublishSets() {
-  const dir = path.join(root, "projects");
-  const hiddenJson = new Set();
-  const hiddenHtml = new Set();
-  const publishedHtml = new Set();
-  if (!fs.existsSync(dir)) return { hiddenJson, hiddenHtml, publishedHtml };
-  for (const name of fs.readdirSync(dir)) {
-    if (!name.endsWith(".json")) continue;
-    const project = JSON.parse(fs.readFileSync(path.join(dir, name), "utf8"));
-    const htmlValue = fieldValue(project.html_file || project.student_file);
-    const htmlLink = localHtmlPath(htmlValue).split(/[?#]/)[0];
-    if (isHidden(project)) {
-      hiddenJson.add(name);
-      if (htmlLink) hiddenHtml.add(htmlLink);
-    } else if (htmlLink) {
-      publishedHtml.add(htmlLink);
-    }
-  }
-  return { hiddenJson, hiddenHtml, publishedHtml };
-}
-
 fs.mkdirSync(dist, { recursive: true });
 for (const entry of fs.readdirSync(dist)) {
   fs.rmSync(path.join(dist, entry), { recursive: true, force: true });
@@ -56,13 +35,7 @@ const publishedEvents = Array.isArray(events) ? events.filter((event) => !isHidd
 fs.writeFileSync(path.join(dist, "events.json"), JSON.stringify(publishedEvents, null, 2) + "\n");
 copyDir(path.join(root, "assets"), path.join(dist, "assets"));
 copyDir(path.join(root, "media"), path.join(dist, "media"));
-const projectSets = projectPublishSets();
-copyDir(path.join(root, "projects"), path.join(dist, "projects"), (rel) => {
-  const fileName = rel.split("/").pop();
-  if (fileName.endsWith(".json") && projectSets.hiddenJson.has(fileName)) return true;
-  const publicPath = `/projects/${rel}`;
-  return projectSets.hiddenHtml.has(publicPath) && !projectSets.publishedHtml.has(publicPath);
-});
+copyDir(path.join(root, "vibe-coded-projects"), path.join(dist, "vibe-coded-projects"), (rel) => rel.endsWith(".json"));
 copyDir(path.join(root, "events"), path.join(dist, "events"));
 fs.mkdirSync(path.join(dist, "news"), { recursive: true });
 fs.copyFileSync(path.join(root, "news", "index.html"), path.join(dist, "news", "index.html"));
@@ -83,8 +56,9 @@ function localHtmlPath(value) {
   const queryAt = value.search(/[?#]/);
   const filePath = (queryAt === -1 ? value : value.slice(0, queryAt)).replace(/\\/g, "/");
   const suffix = queryAt === -1 ? "" : value.slice(queryAt);
-  const withSlash = filePath.startsWith("projects/html/") ? `/${filePath}` : filePath;
-  if (!withSlash.startsWith("/projects/html/") || withSlash.includes("..") || !/\.html?$/i.test(withSlash)) return "";
+  const withSlash = filePath.startsWith("/") ? filePath : `/${filePath}`;
+  const allowed = ["/projects/html/", "/media/projects-html/", "/media/projects_html/"];
+  if (!allowed.some((prefix) => withSlash.startsWith(prefix)) || withSlash.includes("..") || !/\.html?$/i.test(withSlash)) return "";
   return withSlash + suffix;
 }
 
@@ -122,7 +96,7 @@ function projectLink(project) {
   return htmlLink;
 }
 
-const projectsDir = path.join(root, "projects");
+const projectsDir = path.join(root, "vibe-coded-projects");
 const projects = [];
 if (fs.existsSync(projectsDir)) {
   for (const name of fs.readdirSync(projectsDir)) {
@@ -133,10 +107,10 @@ if (fs.existsSync(projectsDir)) {
     if (!project.title || !liveLink || isHidden(project)) continue;
     projects.push({
       title: String(project.title),
-      authors: nameList(project.author),
+      authors: nameList(project.authors || project.author),
       guest_authors: nameList(project.guest_authors),
       description: String(description),
-      thumbnail: project.thumbnail ? String(project.thumbnail) : "",
+      thumbnail: fieldValue(project.thumbnail),
       project_type: projectType(project.project_type) || (isHttp(liveLink) ? "app" : "html"),
       live_link: liveLink
     });
@@ -238,4 +212,4 @@ for (const article of news) {
   fs.writeFileSync(path.join(articleDir, "index.html"), articleTemplate.replaceAll("__ARTICLE_SLUG__", article.slug));
 }
 console.log(`Wrote ${news.length} news article(s) to news.json`);
-console.log("Copied index.html, assets/, media/, team/, events/, news/, and projects/ to dist/");
+console.log("Copied index.html, assets/, media/, team/, events/, news/, and vibe-coded-projects/ to dist/");

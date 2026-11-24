@@ -1,16 +1,5 @@
 [
   {
-    "title": "Base44",
-    "authors": [],
-    "guest_authors": [
-      "test"
-    ],
-    "description": "Course recommender from one prompt",
-    "thumbnail": "",
-    "project_type": "app",
-    "live_link": "https://penn-path-pick.base44.app"
-  },
-  {
     "title": "Claude",
     "authors": [
       "public"
@@ -22,26 +11,15 @@
     "live_link": "https://claude.ai/public/artifacts/5dcd7214-289c-499f-9cf3-4ea6bf34eadb"
   },
   {
-    "title": "Claude2",
-    "authors": [],
-    "guest_authors": [
-      "Someone"
-    ],
-    "description": "Ever fancied yourself as a rocket scientist? Well, now’s your chance! This simulator lets you try your hand at landing a SpaceX rocket.",
-    "thumbnail": "",
-    "project_type": "app",
-    "live_link": "https://claude.ai/public/artifacts/590d0d2a-da07-4a08-9c83-2d3d11b4f63f"
-  },
-  {
-    "title": "Firefly Jar",
+    "title": "Flappy Bird",
     "authors": [
       "Andrew He"
     ],
     "guest_authors": [],
     "description": "",
-    "thumbnail": "",
+    "thumbnail": "/media/projects_images/Goldfish-ezgif.com-webp-to-jpg-converter.jpg",
     "project_type": "html",
-    "live_link": "/projects/html/firefly-jar.html"
+    "live_link": "/media/projects_html/flappybird.html"
   },
   {
     "title": "Lovable PAPI Wiki",
@@ -78,7 +56,9 @@
   },
   {
     "title": "Vercel",
-    "authors": [],
+    "authors": [
+      "Cina He"
+    ],
     "guest_authors": [],
     "description": "",
     "thumbnail": "",
