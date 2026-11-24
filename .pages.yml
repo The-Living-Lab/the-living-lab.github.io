@@ -58,7 +58,7 @@ content:
         type: select
         required: true
         default: published
-        description: Published entries appear on the website. Hidden entries stay in Pages CMS.
+        description: Published entries appear on the live site. Hidden entries stay in Pages CMS and GitHub
         options:
           values:
             - name: published
