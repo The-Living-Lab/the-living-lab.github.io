@@ -7,7 +7,7 @@ on:
     inputs:
       payload:
         description: Pages CMS payload as JSON
-        required: false
+        required: true
         type: string
 
 permissions:
