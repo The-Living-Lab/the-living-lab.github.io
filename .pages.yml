@@ -414,3 +414,13 @@ content:
           format: markdown
           media: news
           rename: safe
+
+
+actions:
+  - name: publish-site
+    label: Publish site
+    workflow: deploy.yml
+    confirm:
+      title: Publish the site?
+      message: This builds the static site from the current GitHub files and publishes it to GitHub Pages.
+      button: Publish
