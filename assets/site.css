@@ -309,6 +309,13 @@ a.event-card:hover { border-color: var(--hover); }
   font-size: 1.12rem;
 }
 
+.event-card h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.event-card h2 a:hover { text-decoration: underline; }
+
 .where,
 .card-text,
 .role,

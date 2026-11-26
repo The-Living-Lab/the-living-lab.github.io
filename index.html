@@ -142,6 +142,12 @@
       title.textContent = event.title;
 
       nextEvent.append(kicker, title);
+      if (event.time) {
+        const when = document.createElement("p");
+        when.className = "where";
+        when.textContent = event.time;
+        nextEvent.append(when);
+      }
       if (event.location) {
         const where = document.createElement("p");
         where.className = "where";

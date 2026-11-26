@@ -33,6 +33,19 @@ const eventsFile = path.join(root, "events.json");
 const events = JSON.parse(fs.readFileSync(eventsFile, "utf8"));
 const publishedEvents = Array.isArray(events) ? events.filter((event) => !isHidden(event)) : [];
 fs.writeFileSync(path.join(dist, "events.json"), JSON.stringify(publishedEvents, null, 2) + "\n");
+const pastDir = path.join(root, "past-events");
+const pastEvents = [];
+if (fs.existsSync(pastDir)) {
+  for (const name of fs.readdirSync(pastDir)) {
+    if (!name.endsWith(".json")) continue;
+    const event = JSON.parse(fs.readFileSync(path.join(pastDir, name), "utf8"));
+    if (event && event.title && !isHidden(event)) pastEvents.push(event);
+  }
+}
+pastEvents.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || String(a.title || "").localeCompare(String(b.title || "")));
+const pastManifest = JSON.stringify(pastEvents, null, 2) + "\n";
+fs.writeFileSync(path.join(dist, "past-events.json"), pastManifest);
+fs.writeFileSync(path.join(root, "past-events.json"), pastManifest);
 copyDir(path.join(root, "assets"), path.join(dist, "assets"));
 copyDir(path.join(root, "media"), path.join(dist, "media"));
 copyDir(path.join(root, "papi"), path.join(dist, "papi"), (rel) => rel.endsWith(".json"));

@@ -77,11 +77,8 @@
       return `${months[month - 1]} ${day}, ${year}`;
     }
 
-    function todayKey() {
-      const now = new Date();
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const day = String(now.getDate()).padStart(2, "0");
-      return `${now.getFullYear()}-${month}-${day}`;
+    function isHttp(value) {
+      return /^https?:\/\//i.test(String(value || ""));
     }
 
     function cardFor(event) {
@@ -99,9 +96,24 @@
       }
 
       const title = document.createElement("h2");
-      title.textContent = event.title;
+      if (isHttp(event.link)) {
+        const link = document.createElement("a");
+        link.href = event.link;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = event.title;
+        title.append(link);
+      } else {
+        title.textContent = event.title;
+      }
       card.append(kicker, title);
 
+      if (event.time) {
+        const when = document.createElement("p");
+        when.className = "where";
+        when.textContent = event.time;
+        card.append(when);
+      }
       if (event.location) {
         const where = document.createElement("p");
         where.className = "where";
@@ -131,27 +143,40 @@
       lists.append(group);
     }
 
-    function render(records) {
-      lists.replaceChildren();
-      const events = records
+    function published(records) {
+      return (Array.isArray(records) ? records : [])
         .filter((event) => event && event.title && isPublished(event))
         .map((event) => ({ ...event, key: dateKey(event.date) }));
-      const today = todayKey();
-      const upcoming = events.filter((event) => event.key >= today).sort((a, b) => a.key.localeCompare(b.key));
-      const past = events.filter((event) => event.key && event.key < today).sort((a, b) => b.key.localeCompare(a.key));
-      const undated = events.filter((event) => !event.key);
-
-      count.textContent = events.length === 1 ? "1 event" : `${events.length} events`;
-      empty.hidden = events.length > 0;
-      const split = past.length > 0 && (upcoming.length > 0 || undated.length > 0);
-      addGroup(split ? "Upcoming" : "", upcoming.concat(undated));
-      addGroup(split ? "Past" : "", past);
     }
 
-    fetch("/events.json", { cache: "no-store" })
-      .then((response) => (response.ok ? response.json() : []))
-      .then((data) => render(Array.isArray(data) ? data : []))
-      .catch(() => render([]));
+    function clockMinutes(time) {
+      const match = String(time || "").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+      if (!match) return 24 * 60;
+      let hour = Number(match[1]) % 12;
+      if (/pm/i.test(match[3])) hour += 12;
+      return hour * 60 + Number(match[2]);
+    }
+
+    function render(upcomingRecords, pastRecords) {
+      lists.replaceChildren();
+      const upcoming = published(upcomingRecords).sort((a, b) => (a.key || "9999").localeCompare(b.key || "9999") || clockMinutes(a.time) - clockMinutes(b.time) || a.title.localeCompare(b.title));
+      const past = published(pastRecords).sort((a, b) => (b.key || "").localeCompare(a.key || "") || a.title.localeCompare(b.title));
+      const shown = upcoming.length + past.length;
+      count.textContent = shown === 1 ? "1 event" : `${shown} events`;
+      empty.hidden = shown > 0;
+      addGroup(upcoming.length ? "Upcoming" : "", upcoming);
+      addGroup(past.length ? "Past" : "", past);
+    }
+
+    function loadList(url) {
+      return fetch(url, { cache: "no-store" })
+        .then((response) => (response.ok ? response.json() : []))
+        .then((data) => (Array.isArray(data) ? data : []))
+        .catch(() => []);
+    }
+
+    Promise.all([loadList("/events.json"), loadList("/past-events.json")])
+      .then(([upcoming, past]) => render(upcoming, past));
   </script>
 </body>
 </html>

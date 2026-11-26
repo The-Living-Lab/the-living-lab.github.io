@@ -323,6 +323,22 @@ content:
       - name: summary
         label: Summary
         type: text
+      - name: time
+        label: Time
+        type: string
+        description: Clock time, such as 11:00 AM - 12:00 PM EST. Filled in automatically for Penn GSE events.
+      - name: link
+        label: Link
+        type: string
+        description: Optional page for this event. The live site opens it in a new tab.
+      - name: source
+        label: Source
+        type: string
+        hidden: true
+      - name: source_id
+        label: Source id
+        type: string
+        hidden: true
 
 
 
