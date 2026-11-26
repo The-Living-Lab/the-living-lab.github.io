@@ -418,12 +418,12 @@ content:
 
 actions:
   - name: sync-gse-events
-    label: Update from Penn GSE
+    label: Update Penn GSE events
     workflow: sync-events.yml
     ref: current
     confirm:
       title: Update events from Penn GSE?
-      message: This replaces upcoming imported events with the current public GSE calendar and archives events whose date has passed.
+      message: This manually replaces upcoming imported events with the current public GSE calendar and archives events whose date has passed.
       button: Update events
   - name: publish-site
     label: Publish site
