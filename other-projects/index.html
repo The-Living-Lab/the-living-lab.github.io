@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects · Living Lab</title>
+  <title>Other Projects · Living Lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,13 @@
       </a>
       <nav class="site-nav" aria-label="Site">
         <a href="/">Home</a>
-        <a href="/vibe-coded-projects/" aria-current="page">Projects</a>
+        <details class="nav-menu is-current">
+          <summary>Projects</summary>
+          <div class="nav-menu-panel">
+            <a href="/papi/">Penn AI Pedagogy Initiative (PAPI)</a>
+            <a href="/other-projects/" aria-current="page">Other Projects</a>
+          </div>
+        </details>
         <details class="nav-menu">
           <summary>About Us</summary>
           <div class="nav-menu-panel">
@@ -44,8 +50,8 @@
   </header>
 
   <main class="page">
-    <h1 class="page-title">Projects</h1>
-    <p class="page-lead">Graduate student projects and prototypes.</p>
+    <h1 class="page-title">Other Projects</h1>
+    <p class="page-lead">Projects and prototypes from the lab.</p>
     <p class="count" id="project-count" aria-live="polite"></p>
     <div class="cards" id="projects"></div>
     <p class="empty" id="projects-empty" hidden>No projects yet. Add one in Pages CMS with a deployed app address or an HTML file.</p>
@@ -166,7 +172,7 @@
       }
     }
 
-    fetch("/projects.json", { cache: "no-store" })
+    fetch("/other-projects.json", { cache: "no-store" })
       .then((response) => (response.ok ? response.json() : []))
       .then((data) => render(Array.isArray(data) ? data : []))
       .catch(() => render([]));

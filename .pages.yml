@@ -38,10 +38,104 @@ media:
 
 
 content:
-  - name: vibe-coded-projects
-    label: Vibe-Coded Projects
+  - name: papi
+    label: Penn AI Pedagogy Initiative (PAPI)
     type: collection
-    path: vibe-coded-projects       # The GitHub folder where the project data is saved
+    path: papi
+    filename: "{primary}.json"
+    view:
+      primary: title
+      fields: [title, status, authors, guest-authors, project-type, description]
+      sort: [status, title]
+      default:
+        sort: status
+        order: desc
+    fields:
+      - name: title
+        label: Project Title
+        type: string
+        required: true
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: published
+        description: Published entries appear on the live site. Hidden entries stay in Pages CMS and GitHub
+        options:
+          values:
+            - name: published
+              label: Published
+            - name: hidden
+              label: Hidden from live site, saved on GitHub
+      - name: authors
+        label: Living Lab Team Authors
+        type: reference
+        required: false
+        description: Only existing team members in the "Team" content page can be selected here
+        options:
+          collection: team
+          multiple: true
+          value: "{fields.name}"
+          label: "{fields.name}"
+          search: [fields.name]
+      - name: guest-authors
+        label: Guest Authors
+        type: object
+        list: true
+        description: Add external collaborators who are not in the Team collection.
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: photo
+            label: Headshot (optional)
+            type: image
+            required: false
+            options:
+              media: guests
+              rename: safe
+              extensions: [jpg, jpeg, png, webp]
+      - name: description
+        label: Description
+        type: text
+      - name: thumbnail
+        label: Thumbnail Image
+        type: image
+        options:
+          media: projects-thumbnails
+      - name: project-type
+        label: Project type
+        type: select
+        required: true
+        default: app
+        description: Choose Deployed app for a site that is already online, or HTML file for a page uploaded here. The live site opens whichever one you choose in a new tab.
+        options:
+          values:
+            - name: app
+              label: Deployed app
+            - name: html
+              label: HTML file
+      - name: live-link
+        label: Deployed app address
+        type: string
+        description: Fill this in for a deployed app.
+        pattern:
+          regex: "^$|^https?://.+"
+          message: Enter a full address starting with http:// or https://
+      - name: html-file
+        label: HTML file
+        type: file
+        description: Upload an HTML file here for this project.
+        options:
+          media: projects-html
+          extensions: [html, htm]
+          rename: safe
+
+  - name: other-projects
+    label: Other Projects
+    type: collection
+    path: other-projects
     filename: "{primary}.json"
     
     view:

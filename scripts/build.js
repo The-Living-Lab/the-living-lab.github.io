@@ -35,7 +35,8 @@ const publishedEvents = Array.isArray(events) ? events.filter((event) => !isHidd
 fs.writeFileSync(path.join(dist, "events.json"), JSON.stringify(publishedEvents, null, 2) + "\n");
 copyDir(path.join(root, "assets"), path.join(dist, "assets"));
 copyDir(path.join(root, "media"), path.join(dist, "media"));
-copyDir(path.join(root, "vibe-coded-projects"), path.join(dist, "vibe-coded-projects"), (rel) => rel.endsWith(".json"));
+copyDir(path.join(root, "papi"), path.join(dist, "papi"), (rel) => rel.endsWith(".json"));
+copyDir(path.join(root, "other-projects"), path.join(dist, "other-projects"), (rel) => rel.endsWith(".json"));
 copyDir(path.join(root, "events"), path.join(dist, "events"));
 fs.mkdirSync(path.join(dist, "news"), { recursive: true });
 fs.copyFileSync(path.join(root, "news", "index.html"), path.join(dist, "news", "index.html"));
@@ -121,9 +122,10 @@ function projectLink(project) {
   return appOk || htmlLink;
 }
 
-const projectsDir = path.join(root, "vibe-coded-projects");
-const projects = [];
-if (fs.existsSync(projectsDir)) {
+function readProjects(dirName) {
+  const projectsDir = path.join(root, dirName);
+  const projects = [];
+  if (!fs.existsSync(projectsDir)) return projects;
   for (const name of fs.readdirSync(projectsDir)) {
     if (!name.endsWith(".json")) continue;
     const project = JSON.parse(fs.readFileSync(path.join(projectsDir, name), "utf8"));
@@ -141,12 +143,19 @@ if (fs.existsSync(projectsDir)) {
       live_link: liveLink
     });
   }
+  projects.sort((a, b) => a.title.localeCompare(b.title));
+  return projects;
 }
-projects.sort((a, b) => a.title.localeCompare(b.title));
-const manifest = JSON.stringify(projects, null, 2);
-fs.writeFileSync(path.join(dist, "projects.json"), manifest);
-fs.writeFileSync(path.join(root, "projects.json"), manifest);
-console.log(`Wrote ${projects.length} project(s) to projects.json`);
+
+function writeProjectManifest(dirName, fileName) {
+  const manifest = JSON.stringify(readProjects(dirName), null, 2);
+  fs.writeFileSync(path.join(dist, fileName), manifest);
+  fs.writeFileSync(path.join(root, fileName), manifest);
+  console.log(`Wrote ${JSON.parse(manifest).length} project(s) to ${fileName}`);
+}
+
+writeProjectManifest("papi", "papi.json");
+writeProjectManifest("other-projects", "other-projects.json");
 
 const teamDir = path.join(root, "team");
 const rootTeamPath = path.join(root, "team.json");
@@ -238,4 +247,4 @@ for (const article of news) {
   fs.writeFileSync(path.join(articleDir, "index.html"), articleTemplate.replaceAll("__ARTICLE_SLUG__", article.slug));
 }
 console.log(`Wrote ${news.length} news article(s) to news.json`);
-console.log("Copied index.html, assets/, media/, team/, events/, news/, and vibe-coded-projects/ to dist/");
+console.log("Copied index.html, assets/, media/, team/, events/, news/, papi/, and other-projects/ to dist/");

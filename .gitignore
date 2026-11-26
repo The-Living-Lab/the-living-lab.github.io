@@ -1,4 +1,6 @@
 node_modules/
 dist/
 projects.json
+papi.json
+other-projects.json
 news.json

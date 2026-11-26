@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penn AI Pedagogy Initiative (PAPI) · Living Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/media/general/Logo_GSE_LivingLab_White_RGB.png" alt="Penn GSE Living Laboratory for Human Agency and Artificial Intelligence">
+      </a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="/">Home</a>
+        <details class="nav-menu is-current">
+          <summary>Projects</summary>
+          <div class="nav-menu-panel">
+            <a href="/papi/" aria-current="page">Penn AI Pedagogy Initiative (PAPI)</a>
+            <a href="/other-projects/">Other Projects</a>
+          </div>
+        </details>
+        <details class="nav-menu">
+          <summary>About Us</summary>
+          <div class="nav-menu-panel">
+            <span class="nav-later">Our Mission<span class="visually-hidden">, coming later</span></span>
+            <a href="/team/">People</a>
+            <span class="nav-later">Work With Us<span class="visually-hidden">, coming later</span></span>
+          </div>
+        </details>
+        <details class="nav-menu">
+          <summary>News &amp; Events</summary>
+          <div class="nav-menu-panel">
+            <a href="/news/">News</a>
+            <a href="/events/">Events</a>
+            <span class="nav-later">Publications<span class="visually-hidden">, coming later</span></span>
+            <span class="nav-later">Podcast<span class="visually-hidden">, coming later</span></span>
+            <span class="nav-later">AI Tinkery<span class="visually-hidden">, coming later</span></span>
+          </div>
+        </details>
+        <span class="nav-later">Newsletter<span class="visually-hidden">, coming later</span></span>
+        <span class="nav-later">Academics<span class="visually-hidden">, coming later</span></span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1 class="page-title">Penn AI Pedagogy Initiative (PAPI)</h1>
+    <p class="page-lead">Projects from the Penn AI Pedagogy Initiative.</p>
+    <p class="count" id="project-count" aria-live="polite"></p>
+    <div class="cards" id="projects"></div>
+    <p class="empty" id="projects-empty" hidden>No projects yet. Add one in Pages CMS with a deployed app address or an HTML file.</p>
+  </main>
+
+  <script>
+    const list = document.querySelector("#projects");
+    const count = document.querySelector("#project-count");
+    const empty = document.querySelector("#projects-empty");
+
+    function assetUrl(value) {
+      if (!value) return "";
+      const splitAt = value.search(/[?#]/);
+      const filePath = splitAt === -1 ? value : value.slice(0, splitAt);
+      const suffix = splitAt === -1 ? "" : value.slice(splitAt);
+      return filePath.split("/").map((part, index) => (index === 0 ? part : encodeURIComponent(part))).join("/") + suffix;
+    }
+
+    function externalIcon() {
+      const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      icon.setAttribute("class", "new-tab");
+      icon.setAttribute("viewBox", "0 0 24 24");
+      icon.setAttribute("aria-hidden", "true");
+      icon.innerHTML = '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10 14 21 3"/>';
+      return icon;
+    }
+
+    function peopleList(value) {
+      if (!value) return [];
+      const items = Array.isArray(value) ? value : [value];
+      return items.flatMap((item) => {
+        if (typeof item === "string") {
+          const name = item.trim();
+          return name ? [{ name }] : [];
+        }
+        if (item && typeof item === "object") {
+          const name = String(item.name || item.label || item.value || "").trim();
+          if (!name) return [];
+          const photo = typeof item.photo === "string" ? item.photo.trim() : "";
+          return [photo ? { name, photo } : { name }];
+        }
+        return [];
+      });
+    }
+
+    function appendPeople(card, people, label) {
+      if (!people.length) return;
+      const byline = document.createElement("p");
+      byline.className = "byline";
+      if (label) byline.append(document.createTextNode(`${label} `));
+      people.forEach((person, index) => {
+        if (index) byline.append(document.createTextNode(", "));
+        if (person.photo) {
+          const image = document.createElement("img");
+          image.className = "byline-photo";
+          image.src = assetUrl(person.photo);
+          image.alt = "";
+          byline.append(image);
+        }
+        byline.append(document.createTextNode(person.name));
+      });
+      card.append(byline);
+    }
+
+    function isPublished(entry) {
+      return String(entry && entry.status || "").trim().toLowerCase() !== "hidden";
+    }
+
+    function canOpen(href) {
+      if (/^https?:\/\//i.test(href)) return true;
+      const pathOnly = href.split(/[?#]/)[0];
+      return /^\/(projects\/html|media\/projects-html|media\/projects_html)\//.test(pathOnly) && !pathOnly.includes("..") && /\.html?$/i.test(pathOnly);
+    }
+
+    function render(projects) {
+      list.replaceChildren();
+      const visible = projects.filter((project) => project && project.title && isPublished(project) && canOpen(project.live_link || ""));
+      count.textContent = visible.length === 1 ? "1 project" : `${visible.length} projects`;
+      empty.hidden = visible.length > 0;
+
+      for (const project of visible) {
+        const card = document.createElement("a");
+        card.className = "card";
+        card.href = assetUrl(project.live_link);
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+
+        if (project.thumbnail) {
+          const preview = document.createElement("div");
+          preview.className = "thumb";
+          const image = document.createElement("img");
+          image.src = assetUrl(project.thumbnail);
+          image.alt = "";
+          preview.append(image);
+          card.append(preview);
+        }
+
+        const title = document.createElement("h2");
+        title.textContent = project.title;
+        title.append(externalIcon());
+        const hint = document.createElement("span");
+        hint.className = "visually-hidden";
+        hint.textContent = "Opens in a new tab";
+        title.append(hint);
+        card.append(title);
+
+        appendPeople(card, peopleList(project.authors));
+        appendPeople(card, peopleList(project.guest_authors), "Guest authors:");
+
+        if (project.description) {
+          const summary = document.createElement("p");
+          summary.className = "card-text";
+          summary.textContent = project.description;
+          card.append(summary);
+        }
+
+        list.append(card);
+      }
+    }
+
+    fetch("/papi.json", { cache: "no-store" })
+      .then((response) => (response.ok ? response.json() : []))
+      .then((data) => render(Array.isArray(data) ? data : []))
+      .catch(() => render([]));
+  </script>
+</body>
+</html>

@@ -218,6 +218,8 @@ a { color: inherit; }
 .nav-menu-panel a,
 .nav-menu-panel .nav-later {
   display: block;
+  max-width: 18rem;
+  white-space: normal;
 }
 
 .page { padding: 0.35rem 0 4.5rem; }
