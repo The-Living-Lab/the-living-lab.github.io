@@ -157,7 +157,7 @@ content:
         type: select
         required: true
         default: published
-        description: Published entries appear on the live site. Hidden entries stay in Pages CMS and GitHub
+        description: Published entries appear on the live site, hidden entries stay in Pages CMS and the GitHub repo
         options:
           values:
             - name: published
@@ -313,13 +313,13 @@ content:
         type: select
         required: true
         default: published
-        description: Published entries appear on the website. Hidden entries stay in Pages CMS.
+        description: Published entries appear on the live site, hidden entries stay in Pages CMS and the GitHub repo
         options:
           values:
             - name: published
               label: Published
             - name: hidden
-              label: Hidden from live site, still in GitHub
+              label: Hidden
       - name: date
         label: Date
         type: date
