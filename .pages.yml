@@ -292,17 +292,10 @@ content:
 
   - name: events
     label: Events
-    type: collection
+    type: file
     path: events.json
     format: json
     list: true
-    view:
-      primary: title
-      fields: [title, status, date]
-      sort: [status, date]
-      default:
-        sort: status
-        order: desc
     fields:
       - name: title
         label: Title
