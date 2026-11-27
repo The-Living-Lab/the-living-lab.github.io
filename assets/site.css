@@ -644,6 +644,112 @@ a.person:hover { border-color: var(--hover); }
   outline-offset: 3px;
 }
 
+.fellowship-hero h1 { max-width: 16em; }
+
+.fellowship-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1rem;
+  margin: 0 0 0.85rem;
+}
+
+.fellowship-badge {
+  display: inline-block;
+  padding: 0.28rem 0.62rem;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.fellowship-tagline {
+  margin: 0.7rem 0 0.85rem;
+  color: var(--highlight);
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.fellowship-note {
+  margin: 0.85rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.fellowship-card,
+.fellowship-apply {
+  margin-top: 1rem;
+  padding: 1.25rem 1.3rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.fellowship-card h3 {
+  margin: 1.2rem 0 0.4rem;
+  font-size: 1.05rem;
+}
+
+.fellowship-facts { margin: 0.8rem 0 0; }
+
+.fellowship-facts div {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0.8rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.fellowship-facts dt {
+  color: var(--highlight);
+  font-weight: 700;
+}
+
+.fellowship-facts dd { margin: 0; }
+
+.fellowship-dates {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  margin: 1rem 0 0;
+  padding: 0.9rem 0 0;
+  border-top: 3px solid var(--highlight);
+  list-style: none;
+}
+
+.fellowship-dates strong,
+.fellowship-dates span { display: block; }
+
+.fellowship-dates span {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.fellowship-ideas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.45rem 1.2rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fellowship-ideas li {
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--accent);
+}
+
+@media (max-width: 720px) {
+  .fellowship-facts div,
+  .fellowship-dates,
+  .fellowship-ideas { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 980px) {
   .pillars { grid-template-columns: repeat(2, 1fr); }
 }

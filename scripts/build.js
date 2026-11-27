@@ -51,6 +51,8 @@ copyDir(path.join(root, "media"), path.join(dist, "media"));
 copyDir(path.join(root, "papi"), path.join(dist, "papi"), (rel) => rel.endsWith(".json"));
 copyDir(path.join(root, "other-projects"), path.join(dist, "other-projects"), (rel) => rel.endsWith(".json"));
 copyDir(path.join(root, "events"), path.join(dist, "events"));
+fs.mkdirSync(path.join(dist, "teacher-inventor-fellowship"), { recursive: true });
+fs.copyFileSync(path.join(root, "teacher-inventor-fellowship", "index.html"), path.join(dist, "teacher-inventor-fellowship", "index.html"));
 fs.mkdirSync(path.join(dist, "news"), { recursive: true });
 fs.copyFileSync(path.join(root, "news", "index.html"), path.join(dist, "news", "index.html"));
 
@@ -260,4 +262,4 @@ for (const article of news) {
   fs.writeFileSync(path.join(articleDir, "index.html"), articleTemplate.replaceAll("__ARTICLE_SLUG__", article.slug));
 }
 console.log(`Wrote ${news.length} news article(s) to news.json`);
-console.log("Copied index.html, assets/, media/, team/, events/, news/, papi/, and other-projects/ to dist/");
+console.log("Copied index.html, assets/, media/, team/, events/, news/, papi/, other-projects/, and teacher-inventor-fellowship/ to dist/");
