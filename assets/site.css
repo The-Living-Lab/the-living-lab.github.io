@@ -122,6 +122,17 @@ a { color: inherit; }
 
 .site-nav a[aria-current="page"]:hover { color: var(--accent-ink); }
 
+.site-nav a.header-subscribe {
+  margin-left: 0.35rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.site-nav a.header-subscribe:hover {
+  color: var(--accent-ink);
+  filter: brightness(1.08);
+}
+
 .nav-later {
   color: var(--faint);
   cursor: default;
