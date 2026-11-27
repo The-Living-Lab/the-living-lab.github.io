@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
   <script src="/assets/theme.js"></script>
   <link rel="stylesheet" href="/assets/site.css">
 </head>
@@ -193,5 +194,19 @@
       .then((data) => render(Array.isArray(data) ? data : []))
       .catch(() => render([]));
   </script>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <a class="site-footer-logo" href="https://www.upenn.edu">
+        <img src="/media/general/UniversityofPennsylvania_FullLogo_RGB.png" alt="University of Pennsylvania">
+      </a>
+      <nav aria-label="University">
+        <a href="https://www.upenn.edu/about/privacy-policy">Privacy Policy</a>
+        <a href="https://accessibility.web-resources.upenn.edu/get-help">Report Accessibility Issues and Get Help</a>
+        <a href="https://www.upenn.edu/about/disclaimer">Disclaimer</a>
+        <a href="https://www.publicsafety.upenn.edu/contact/">Emergency Services</a>
+        <a href="https://www.upenn.edu/about/report-copyright-infringement">Report Copyright Infringement</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>

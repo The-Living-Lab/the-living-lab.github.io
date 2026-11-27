@@ -30,6 +30,8 @@
 * { box-sizing: border-box; }
 
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   min-height: 100vh;
   font-family: Outfit, "Segoe UI", system-ui, sans-serif;
@@ -781,4 +783,52 @@ a.person:hover { border-color: var(--hover); }
   .hero { padding: 1.35rem 1.15rem 1.2rem; }
 
   .pillars { grid-template-columns: 1fr; }
+
+  .site-footer-inner { width: min(var(--header), calc(100% - 2rem)); }
+
+  .site-footer-logo img { height: 3.4rem; }
 }
+
+body > main { flex: 1 0 auto; }
+
+.site-footer {
+  margin-top: 2.5rem;
+  padding: 2.25rem 0 1.85rem;
+  background: #f7f7f7;
+  color: #000;
+}
+
+.site-footer-inner {
+  width: min(var(--header), calc(100% - 3rem));
+  margin: 0 auto;
+}
+
+.site-footer-logo {
+  display: inline-block;
+  margin: 0 0 1.75rem;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.site-footer-logo img {
+  display: block;
+  height: 4.5rem;
+  width: auto;
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.35rem;
+}
+
+.site-footer nav a {
+  color: #990000;
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.site-footer nav a:hover { color: #011f5b; }
